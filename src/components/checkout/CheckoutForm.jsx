@@ -32,6 +32,25 @@ export const CheckoutForm = ({ onSubmit, onCancel }) => {
 
   const handlePaymentChange = (e) => {
     const { name, value } = e.target;
+    
+    // 有効期限フィールドの特別処理
+    if (name === 'expiryDate') {
+      // 数字のみを抽出
+      const numbers = value.replace(/\D/g, '');
+      
+      // MM/YY形式に自動フォーマット
+      let formatted = numbers;
+      if (numbers.length >= 2) {
+        formatted = numbers.slice(0, 2) + '/' + numbers.slice(2, 4);
+      }
+      
+      setPaymentInfo(prev => ({ ...prev, [name]: formatted }));
+      if (errors[name]) {
+        setErrors(prev => ({ ...prev, [name]: '' }));
+      }
+      return;
+    }
+    
     setPaymentInfo(prev => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
