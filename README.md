@@ -15,6 +15,8 @@
 - Node.js (推奨: v18以上)
 - npm
 
+Node.js および npm のセットアップは https://nodejs.org/ja/download を参照してください。
+
 ### 依存関係のインストール
 
 ```bash
